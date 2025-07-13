@@ -2,20 +2,23 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  # Load environment variables from .env file
 
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TOKEN = os.getenv("TELEGRAM_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 
-message = "🚀 Hello from your CentOS Telegram bot!"
+message = "Test message from Railway!"  # Message to send
 
-url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+# Telegram API URL
+url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+
+# Payload for the message
 payload = {'chat_id': CHAT_ID, 'text': message}
 
-response = requests.post(url, data=payload)
+# Send the POST request to Telegram API
+res = requests.post(url, data=payload)
 
-if response.status_code == 200:
-    print("Message sent successfully!")
-else:
-    print("Failed to send message:", response.text)
+# Debugging: Print the response to check the status
+print("Response from Telegram API:", res.text)
+
 
